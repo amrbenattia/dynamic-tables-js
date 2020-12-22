@@ -1,0 +1,92 @@
+
+* {
+box-sizing: border-box;
+}
+/* .container {
+    position:absolute;
+    margin: auto;
+    width: 98%;
+    border: 3px solid green;
+    padding: 10px;
+  }
+.row {
+margin-left:-5px;
+margin-right:-5px;
+margin-bottom: 20px;
+margin-top: 20px;
+} */
+
+/* .column {
+float: left;
+width: 25%;
+padding: 2px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+content: "";
+clear: both;
+display: table;
+}
+
+/* table {
+border-collapse: collapse;
+border-spacing: 0;
+width: 100%;
+border: 1px solid black;
+font-size:70%
+} */
+
+th, td {
+text-align: center;
+padding: 2px;
+border-right: solid 1px blue; 
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other on screens that are smaller than 600 px */
+@media screen and (max-width: 600px) {
+.column {
+    width: 100%;
+}
+} */
+
+
+/* .invisible {
+border: none;
+background-color:transparent;
+}
+.leftHeader {
+font-weight: bold;
+background-color:lightgray;
+border: solid 1px black;
+}
+
+th {
+background-color:lightgray;
+border-bottom: solid 1px black ;
+} */
+
+.rotated {
+    background-color: rgba(0, 0, 0, 0);
+    /* border-right: solid 1px black;
+    border-top: solid 1px black; */
+    writing-mode: vertical-rl;
+    transform: rotate(-90deg);
+}
+
+#firstDiv{
+    
+    margin: auto;
+    width: 98%;
+    border: 3px solid red;
+    padding: 10px;
+}
+
+
+.block:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em; /* Adjusts for spacing */
+   }

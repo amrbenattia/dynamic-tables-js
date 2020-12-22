@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.79.0">
+        <title>مثال الألبوم · Bootstrap v5.0</title>
+    
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album-rtl/">
+    
+        
+    
+        <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="./script.js"></script>
+
+    <style>
+       th, td {
+        text-align: center;
+        white-space: nowrap;
+        width: 70%;
+        vertical-align: middle;
+       }
+       table {
+        font-size:89%
+
+       }
+        .rotated {
+            background-color: rgba(0, 0, 0, 0);
+            writing-mode: vertical-rl;
+            transform: rotate(-90deg);
+        }
+        #main_table{
+            font-size: 300%;
+        }
+
+    </style>
+</head>
+<body>
+    <table id="base-table" class="table-bordered border-primary" style="display: none;">
+        <thead>
+        <tr>
+            <th ></th> <!--style="border: none;"-->
+            <th ></th> <!--style="border: none;"-->
+            <th scope="col" colspan="10">Category</th>
+        </tr>
+        <tr>
+        <th ></th> <!--style="border: none;"-->
+        <th ></th> <!--style="border: none;"-->
+        <th scope="col">JT_L</th>
+        <th scope="col">JT_R</th>
+        <th scope="col">SJT</th>
+        <th scope="col">L_E</th>
+        <th scope="col">R_E</th>
+        <th scope="col">FLEX</th>
+        <th scope="col">L_KN</th>
+        <th scope="col">R_KN</th>
+        <th scope="col">L_Crouch</th>
+        <th scope="col">R_Crouch</th>
+        </tr>
+        </thead>
+        <tbody id=tableData>
+          <!-- Data is filled with script  -->
+        </tbody>
+      </table>
+
+        <div class="table-responsive">
+            <table id="main-table" class="table table-striped ">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">GAIN</th>
+                    <th scope="col">Fmin</th>
+                    <th scope="col">Amin</th>
+                    <th scope="col">Zero</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">LightGBM</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">Neural Network</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">SVM - Non Linear</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@twitter</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">SVM - Linear</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@twitter</td>
+                    <td>@mdo</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    
+
+
+     <!-- <tr> -->
+         <!-- <th scope="row" rowspan="4" class="rotated">Subject</th> -->
+         <!-- <th scope="row">2</th> -->
+         <!-- <td>Mark</td> -->
+         <!-- <td>Otto</td> -->
+         <!-- <td>@mdo</td> -->
+       <!-- </tr> -->
+       <!-- <tr> -->
+         <!-- <th scope="row">3</th> -->
+         <!-- <td>Jacob</td> -->
+         <!-- <td>Thornton</td> -->
+         <!-- <td>@fat</td> -->
+       <!-- </tr> -->
+       <!-- <tr> -->
+         <!-- <th scope="row">4</th> -->
+         <!-- <td colspan="2">Larry the Bird</td> -->
+         <!-- <td>@twitter</td> -->
+       <!-- </tr> -->
+       <!-- <tr> -->
+         <!-- <th scope="row">4 Front</th> -->
+         <!-- <td colspan="2">Larry the Bird</td> -->
+         <!-- <td>@twitter</td> -->
+        
+         
+
+
+</body>
+</html>
