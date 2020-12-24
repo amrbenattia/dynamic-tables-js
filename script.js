@@ -185,14 +185,14 @@ function createAccurayTable(parent, rows) {
                 console.log(`cell top ${cellTop}`)
                 console.log(`span height ${info_height}`)
 
-                if ((cellLeft + info_width) > .9* screen.width) {
+                if ((cellLeft + info_width) > 0.9 * screen.width) {
                     console.log('Yes')
-                    cellLeft = screen.width - 1.5*info_width
+                    cellLeft = screen.width - 1.5 * info_width
                     info.style.left = cellLeft + "px"
                  }
-                if ((cellTop + info_height) > .8 *screen.height) {
+                if ((cellTop + info_height) > 0.8 * screen.height) {
                 console.log('Yes')
-                cellTop = .9*screen.height - 1.25*info_height
+                cellTop = 0.9 *screen.height - 1.10 *info_height
                 console.log(cellTop)
                 info.style.top = cellTop + "px"
                 }
