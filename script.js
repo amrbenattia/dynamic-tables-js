@@ -38,7 +38,7 @@ function getData(json_data) {
 
 };
 
-
+// confusion table
 function createConfusionTable(parent, mat){
     var tbl  = document.createElement('table');
     tbl.style.width  = '120px';
@@ -102,6 +102,7 @@ function createConfusionTable(parent, mat){
     parent.appendChild(tbl);
 };
 
+// accuracy table
 subj_map = {"123_0":'2', "023_1":'3', "013_2":'4', "012_3":'4F'};
 subj_map2 = {"123_0":'subject 2', "023_1":'subject 3', "013_2":'subject 4', "012_3":'subject 4 Front'};
 categ_map = {'JT_L':'JT_L', 'JT_R':'JT_R', 'SJT':'SJT', 'SLE': 'SENIOR_L_E', 'SRE':'SENIOR_R_E', 'SF':'SENIOR_FLEX', 'SLKn': 'SENIOR_L_Kn', 'SRKn': 'SENIOR_R_Kn', 'SLC':'SENIOR_L_Crouch', 'SRC':'SENIOR_R_Crouch'}
@@ -131,7 +132,6 @@ function createAccurayTable(parent, rows) {
             th.appendChild(document.createTextNode(''));
         };
         
-        
         // main body 
         var tr = tbl.insertRow();
         var categ = Object.keys(rows[subjs[i]])
@@ -150,11 +150,6 @@ function createAccurayTable(parent, rows) {
                 td.style.border = '1px solid red';
                 td.style.fontWeight= 'bold'
                 td.style.transform= 'rotate(-90deg)'
-                // td.style.display= 'block'
-                // td.style.transformOrigin = 'top left'
-                // td.style.marginTop = '-50%'
-                // td.style.whiteSpace = 'nowrap';
-
                 td.setAttribute('rowSpan', '4');
             };
             if (j==0){
@@ -168,16 +163,39 @@ function createAccurayTable(parent, rows) {
             td.onmouseup = function(){showConf(this)};
             function showConf(td) {
                 info.style.position = "absolute";
-                info.style.top = td.getBoundingClientRect().top + "px";
-                info.style.left = td.getBoundingClientRect().left + "px";
+                
+                cellTop = td.getBoundingClientRect().top ;
+                info.style.top = cellTop + "px"
+                cellLeft = td.getBoundingClientRect().left ;
+                info.style.left = cellLeft + "px"
+                
                 // add more info.
-                info.innerHTML = `Subject: ${subj_map[subjs[i]]} , 
-                Category: ${categ[j]} <br>
-                Accuracy: ${parseFloat(rows[subjs[i]][categ[j]]['accuracy']).toFixed(2)}<br>
-                Confusion matrix:`
+                info.innerHTML = `<div style="font-size:14px; text-align: center; "> Subject: <span style="font-style: italic; color: green">${subj_map[subjs[i]]}</span> , 
+                Category: <span style="font-style: italic; color: green">${categ[j]}</span> <br>
+                Accuracy: <span style="font-style: italic; color: green">${parseFloat(rows[subjs[i]][categ[j]]['accuracy']).toFixed(2)}</span><br>
+                <span style="font-weight: bold; color: red; font-size:16px">Confusion Matrix</span></div>`
                 // append confusion matrix to info.
                 createConfusionTable(info, rows[subjs[i]][categ[j]]['confusion_matrix']); 
                 info.style.display = "inline-block";
+                
+                // get info size
+                info_width = info.getBoundingClientRect().width ; info_height = info.getBoundingClientRect().height
+                
+                console.log(`screen height ${screen.height}`)
+                console.log(`cell top ${cellTop}`)
+                console.log(`span height ${info_height}`)
+
+                if ((cellLeft + info_width) > .9* screen.width) {
+                    console.log('Yes')
+                    cellLeft = screen.width - 1.5*info_width
+                    info.style.left = cellLeft + "px"
+                 }
+                if ((cellTop + info_height) > .8 *screen.height) {
+                console.log('Yes')
+                cellTop = .9*screen.height - 1.25*info_height
+                console.log(cellTop)
+                info.style.top = cellTop + "px"
+                }
             }
             docBody.onmousemove = function () {
                 hideconf(this)
