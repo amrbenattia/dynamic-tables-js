@@ -18,7 +18,6 @@
     <style>
        th, td {
         text-align: center;
-        /* white-space: nowrap; */
         vertical-align: middle;
        }
        table {
@@ -34,64 +33,14 @@
 <body>
     <section class="py-5 text-center container modified">
         <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-8 mx-auto">
+          <div class="col-lg-8 col-md-8 mx-auto">
             <h1 class="font-weight-light">Workload Estimation</h1>
-            <p class="lead text-muted">Four different classification methods are implemented on four different imputation approaches, Click the accuracy to show the confusion matrix .</p>
+            <p class="lead text-muted">Cross-validation accuracy for classification methods (LightGBM, Neural Network, SVM) and filling approaches (GAIN, fmin, amin, zero). Click on the accuracy to show the confusion matrix.</p> 
             <p>
             </p>
           </div>
         </div>
       </section>
-    <div class="table-responsive">
-        <table id="main-table" class="table table-striped ">
-            <thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">GAIN</th>
-                <th scope="col">Fmin</th>
-                <th scope="col">Amin</th>
-                <th scope="col">Zero</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row" class="headcol">LightGBM</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row" class="headcol">Neural Network Unbalanced</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row" class="headcol">Neural Network Balanced</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row" class="headcol">SVM - Linear</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row" class="headcol">SVM - Non Linear</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
     
     <span id="info" style="z-index: 10; position: absolute; top: 0; left: 0; display: none; background: #FFF; padding: 10px; border: 2px solid purple; border-radius: 5px 15px;">
     </span>
