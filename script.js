@@ -3,15 +3,13 @@ fetch('final.json')
 
   .then(response => response.json())
   .then(jsonResponse => getData(jsonResponse))
-
-
-// getData in one case
+ 
 function getData(data) {
   createMainTable(data)
 }
 
 // create main table
-const method_map = {'LightGBM':'LightGBM', 'NN_unbalanced':'Neural Network (unbalanced)', 'NN_balanced':'Neural Network (balanced)', 'SVM_lin':'Linear SVM', 'SVM_nl':'Non-linear SVM'}
+//const method_map = {'LightGBM':'LightGBM', 'NN_unbalanced':'Neural Network (unbalanced)', 'NN_balanced':'Neural Network (balanced)', 'SVM_lin':'Linear SVM', 'SVM_nl':'Non-linear SVM'}
 function createMainTable(data){
   documentBody = document.body;
   var tbl  = document.createElement('table');
@@ -40,7 +38,7 @@ function createMainTable(data){
       };
       if (j==0){
         var td = tr.insertCell();
-        td.appendChild(document.createTextNode(method_map[methods[i]]));
+        td.appendChild(document.createTextNode(methods[i]));
         td.style.fontWeight = 'bold'
       }
       var rows = data[methods[i]][filling[j]]
@@ -53,9 +51,9 @@ function createMainTable(data){
 
 
 // accuracy table
-subj_map = {"123_0":'2', "023_1":'3', "013_2":'4', "012_3":'4F'};
-subj_map2 = {"123_0":'subject 2', "023_1":'subject 3', "013_2":'subject 4', "012_3":'subject 4 front'};
-categ_map = {'JT_L':'JT_L', 'JT_R':'JT_R', 'SJT':'SJT', 'SLE': 'SENIOR_L_E', 'SRE':'SENIOR_R_E', 'SF':'SENIOR_FLEX', 'SLKn': 'SENIOR_L_Kn', 'SRKn': 'SENIOR_R_Kn', 'SLC':'SENIOR_L_Crouch', 'SRC':'SENIOR_R_Crouch'}
+subj_map = {"123_0":'1', "023_1":'2', "013_2":'3', "012_3":'4'};
+subj_map2 = {"123_0":'1', "023_1":'2', "013_2":'3', "012_3":'4'};
+categ_map = {'JT_L':'1', 'JT_R':'2', 'SJT':'3', 'SLE': '4', 'SRE':'5', 'SF':'6', 'SLKn': '7', 'SRKn': '8', 'SLC':'9', 'SRC':'10'}
 
 function createAccuracyTable(parent, rows, method, filling) {
   const info = document.getElementById('info');
@@ -65,17 +63,20 @@ function createAccuracyTable(parent, rows, method, filling) {
   const subjs = Object.keys(rows);
   var tr0 = tbl.insertRow();
   var tr1 = tbl.insertRow();
+
   for (let i=0; i < subjs.length; i++){
+  var tr = tbl.insertRow();
+  var categ = Object.keys(rows[subjs[i]])
     if (i==0 ){
       var th = tr0.insertCell();
       th.appendChild(document.createTextNode(''))
       var th = tr0.insertCell();
       th.appendChild(document.createTextNode(''))
       var td0 = tr0.insertCell();
-      td0.appendChild(document.createTextNode('Category'));
+      td0.appendChild(document.createTextNode('Column'));
       td0.style.border = '1px solid red';
       td0.style.fontWeight= 'bold';
-      td0.setAttribute('colSpan', '10');
+      td0.setAttribute('colSpan', `${categ.length}`);
       var th = tr1.insertCell();
       th.appendChild(document.createTextNode(''));
       var th = tr1.insertCell();
@@ -83,13 +84,10 @@ function createAccuracyTable(parent, rows, method, filling) {
     };
     
     // main body 
-    var tr = tbl.insertRow();
-    var categ = Object.keys(rows[subjs[i]])
-
-    for (let j=0; j < categ.length; j++){
+       for (let j=0; j < categ.length; j++){
       if (i==0){
         var th = tr1.insertCell();
-        th.appendChild(document.createTextNode(categ[j]))
+        th.appendChild(document.createTextNode(categ_map[categ[j]]))
         th.style.border = '1px solid blue';
         th.style.fontWeight= 'bold'
         th.title = `${categ_map[categ[j]]}`;
@@ -97,12 +95,12 @@ function createAccuracyTable(parent, rows, method, filling) {
       if (i==0 && j==0){
         var td = tr.insertCell();
         var rotdiv = document.createElement('div');
-        rotdiv.appendChild(document.createTextNode("Subject"));
+        rotdiv.appendChild(document.createTextNode("Index"));
         td.appendChild(rotdiv);
         td.style.border = '1px solid red';
         rotdiv.style.fontWeight= 'bold'
         rotdiv.style.transform= 'rotate(-90deg)'
-        td.setAttribute('rowSpan', '4');
+        td.setAttribute('rowSpan', `${subjs.length}`);
       };
       if (j==0){
         var td = tr.insertCell();
@@ -129,8 +127,8 @@ function createAccuracyTable(parent, rows, method, filling) {
         info.innerHTML = `<div style="font-size:14px;"> 
           Method: <span style="font-style: italic; font-weight: bold">${method}</span><br/>
           Filling: <span style="font-style: italic; font-weight: bold">${filling}</span><br/>
-          Test subject: <span style="font-style: italic; font-weight: bold">${subj_map2[subjs[i]]}</span><br/>
-          Category: <span style="font-style: italic; font-weight: bold">${categ_map[categ[j]]}</span> <br/>
+          Test Index: <span style="font-style: italic; font-weight: bold">${subj_map2[subjs[i]]}</span><br/>
+          Column: <span style="font-style: italic; font-weight: bold">${categ_map[categ[j]]}</span> <br/>
           Accuracy: <span style="font-style: italic; font-weight: bold; color: hsl(${accuracy* 100}, 100%, 25%)">${parseFloat(accuracy).toFixed(2)}</span><br/>
           <span style="font-weight: bold; color: red; font-size:16px">Confusion Matrix</span></div>`
         // append confusion matrix to info.
@@ -164,4 +162,67 @@ function createAccuracyTable(parent, rows, method, filling) {
     };
   };
   parent.appendChild(tbl);  
+};
+// confusion table
+function createConfusionTable(parent, mat){
+  var tbl  = document.createElement('table');
+  tbl.style.width  = '120px';
+  tbl.style.border = '1px solid none';
+  tbl.style.margin = 'auto';
+
+  var tr0 = tbl.insertRow();
+  var tr1 = tbl.insertRow();
+  mat_keys = Object.keys(mat)
+  for (let i=0; i < mat_keys.length; i++){
+    // head row
+    if (i==0){
+      var th = tr0.insertCell();
+      th.appendChild(document.createTextNode(''))
+      var th = tr0.insertCell();
+      th.appendChild(document.createTextNode(''))
+      var td0 = tr0.insertCell();
+      td0.appendChild(document.createTextNode('Prediction'));
+      td0.style.border = '1px solid red';
+      td0.style.fontWeight= 'bold';
+      td0.setAttribute('colSpan', `${mat_keys.length}`);
+      var th = tr1.insertCell();
+      th.appendChild(document.createTextNode(''));
+      var th = tr1.insertCell();
+      th.appendChild(document.createTextNode(''));
+    }
+
+    // main body 
+    var tr = tbl.insertRow();
+    var val_keys = Object.keys(mat[mat_keys[i]])
+    for (let j=0; j < val_keys.length; j++){
+      if (i==0){
+        var th = tr1.insertCell();
+        th.appendChild(document.createTextNode(mat_keys[j]))
+        th.style.border = '1px solid blue';
+        th.style.fontWeight= 'bold'
+      };
+      if (i==0 && j==0){
+        var td = tr.insertCell();
+        td.appendChild(document.createTextNode('Target'));
+        td.style.border = '1px solid red';
+        td.style.fontWeight= 'bold'
+        td.style.transform= 'rotate(-90deg)'
+        td.style.height = 'max-content'
+        td.setAttribute('rowSpan', `${val_keys.length}`);
+      };
+      if (j==0){
+        var td = tr.insertCell();
+        td.appendChild(document.createTextNode(val_keys[i]));
+        td.style.border = '1px solid blue';
+        td.style.fontWeight= 'bold'
+      }
+      var td = tr.insertCell();
+      td.appendChild(document.createTextNode(mat[mat_keys[i]][val_keys[j]]));
+      td.style.border = '1px solid black';
+      if (i === j) {
+        td.style.backgroundColor = "rgb(200, 255, 200)";
+      }
+    };   
+  };
+  parent.appendChild(tbl);
 };
